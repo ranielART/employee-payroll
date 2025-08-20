@@ -63,7 +63,7 @@ namespace employee_payroll
             }
         }
 
-        public async Task loadEmployees(Boolean isArchived)
+        public async Task loadEmployees()
         {
 
 
@@ -74,15 +74,21 @@ namespace employee_payroll
             employeeEmailColumn.DataPropertyName = "email";
             employeePositonColumn.DataPropertyName = "position";
 
+            await loadPeople(employeesTable);
+            await loadPayrollEmployees();
+
+        }
+
+        public async Task loadArchiveEmployees()
+        {
             archiveIdColumn.DataPropertyName = "id";
             archiveNameColumn.DataPropertyName = "name";
             archiveEmailColumn.DataPropertyName = "email";
             archivePositionColumn.DataPropertyName = "position";
 
+            await loadArchivePeople(archiveTable);
 
-            await loadPeople(employeesTable, !isArchived);
-            await loadPeople(archiveTable, isArchived);
-            await loadPayrollEmployees();
+            
         }
 
         public async Task loadPayrollEmployees()
@@ -107,7 +113,7 @@ namespace employee_payroll
 
             payrollTable.DataSource = null;
 
-            var employees = await employeeRepository.GetAllEmployees(false);
+            var employees = await employeeRepository.GetAllEmployees();
             if (employees != null && employees.Count > 0)
             {
                 var employeesWithSalary = employees.Select(e => new
@@ -129,14 +135,14 @@ namespace employee_payroll
 
         }
 
-        public async Task loadPeople(DataGridView dataTable, Boolean isArchived)
+        public async Task loadPeople(DataGridView dataTable)
         {
 
 
             dataTable.DataSource = null;
 
 
-            var employees = await employeeRepository.GetAllEmployees(isArchived);
+            var employees = await employeeRepository.GetAllEmployees();
 
             dataTable.DataSource = employees;
 
@@ -146,6 +152,25 @@ namespace employee_payroll
             }
             isInitialLoad = false;
         }
+
+        public async Task loadArchivePeople(DataGridView dataTable)
+        {
+
+
+            dataTable.DataSource = null;
+
+
+            var employees = await employeeRepository.GetAllArchivedEmployees();
+
+            dataTable.DataSource = employees;
+
+            if (dataTable.Rows.Count > 0)
+            {
+                dataTable.ClearSelection();
+            }
+            isInitialLoad = false;
+        }
+
 
         public void clearEmployeeFields()
         {
@@ -188,7 +213,9 @@ namespace employee_payroll
 
                 MessageBox.Show("Employee added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                await loadEmployees(false);
+                await loadEmployees();
+                await loadHistory();
+                await loadPayrollEmployees();
                 clearEmployeeFields();
 
             }
@@ -287,8 +314,8 @@ namespace employee_payroll
             editButton.Enabled = false;
             payEmployeeButton.Enabled = false;
 
-            await loadEmployees(false);
-            await loadEmployees(true);
+            await loadEmployees();
+            await loadArchiveEmployees();
             await loadPayrollEmployees();
             await loadHistory();
         }
@@ -323,7 +350,7 @@ namespace employee_payroll
                 currentEmployee.SetPosition(updatedEmployee.position);
 
                 MessageBox.Show("Employee updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                await loadEmployees(false);
+                await loadEmployees();
                 clearEmployeeFields();
             }
             catch (Exception ex)
@@ -349,8 +376,9 @@ namespace employee_payroll
                 await employeeRepository.DeleteEmployee(employeeId);
                 MessageBox.Show("Employee deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                await loadEmployees(false);
-                await loadEmployees(true);
+                await loadEmployees();
+                await loadArchiveEmployees();
+                clearEmployeeFields();
 
             }
             catch (Exception ex)
@@ -448,8 +476,8 @@ namespace employee_payroll
                 await employeeRepository.RestoreEmployee(employeeId);
                 MessageBox.Show("Employee restored successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                await loadEmployees(false);
-                await loadEmployees(true);
+                await loadEmployees();
+                await loadArchiveEmployees();
 
             }
             catch (Exception ex)

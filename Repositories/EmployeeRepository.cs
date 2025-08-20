@@ -41,16 +41,23 @@ namespace employee_payroll.Repositories
 
         }
 
-        public async Task<List<Employee>> GetAllEmployees(Boolean isArchived)
+        public async Task<List<Employee>> GetAllEmployees()
         {
-            var employees = await dbContext.employees.Where(e => e.is_active == !isArchived).ToListAsync();  
+            var employees = await dbContext.employees.Where(e => e.is_active == true).ToListAsync();  
+
+            return employees;
+        }
+
+        public async Task<List<Employee>> GetAllArchivedEmployees()
+        {
+            var employees = await dbContext.employees.Where(e => e.is_active == false).ToListAsync();  
 
             return employees;
         }
 
         public async Task<Employee> GetEmployeeByEmail(string email)
         {
-            var employee = await dbContext.employees.FirstOrDefaultAsync(e => e.email == email && e.is_active == true);
+            var employee = await dbContext.employees.FirstOrDefaultAsync(e => e.email == email);
 
             return employee;
         }
