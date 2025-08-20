@@ -30,10 +30,14 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
             imageList1 = new ImageList(components);
             materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             employeeTab = new TabPage();
@@ -59,6 +63,8 @@
             panel1 = new Panel();
             materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             payrollTab = new TabPage();
+            payrollClearButton = new MaterialSkin.Controls.MaterialButton();
+            payrollPositionTxt = new MaterialSkin.Controls.MaterialTextBox();
             payEmployeeButton = new MaterialSkin.Controls.MaterialButton();
             materialLabel12 = new MaterialSkin.Controls.MaterialLabel();
             payrollTable = new DataGridView();
@@ -71,12 +77,47 @@
             materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
             materialLabel11 = new MaterialSkin.Controls.MaterialLabel();
             payrollSalaryTxt = new MaterialSkin.Controls.MaterialTextBox();
-            payrollEmailTxt = new MaterialSkin.Controls.MaterialComboBox();
             payrollIdTxt = new MaterialSkin.Controls.MaterialTextBox();
             payrollNameTxt = new MaterialSkin.Controls.MaterialTextBox();
             panel2 = new Panel();
             materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
             historyTab = new TabPage();
+            historyClearButton = new MaterialSkin.Controls.MaterialButton();
+            panel3 = new Panel();
+            materialLabel14 = new MaterialSkin.Controls.MaterialLabel();
+            materialLabel15 = new MaterialSkin.Controls.MaterialLabel();
+            materialLabel16 = new MaterialSkin.Controls.MaterialLabel();
+            materialLabel17 = new MaterialSkin.Controls.MaterialLabel();
+            materialLabel18 = new MaterialSkin.Controls.MaterialLabel();
+            historyPositionTxt = new MaterialSkin.Controls.MaterialTextBox();
+            materialLabel13 = new MaterialSkin.Controls.MaterialLabel();
+            historyTable = new DataGridView();
+            historyDateColumn = new DataGridViewTextBoxColumn();
+            historyEmployeeName = new DataGridViewTextBoxColumn();
+            historyPosition = new DataGridViewTextBoxColumn();
+            historyAmount = new DataGridViewTextBoxColumn();
+            historyAmountTxt = new MaterialSkin.Controls.MaterialTextBox();
+            historyDateTxt = new MaterialSkin.Controls.MaterialTextBox();
+            historyNameTxt = new MaterialSkin.Controls.MaterialTextBox();
+            archiveTab = new TabPage();
+            materialLabel21 = new MaterialSkin.Controls.MaterialLabel();
+            materialLabel22 = new MaterialSkin.Controls.MaterialLabel();
+            materialLabel23 = new MaterialSkin.Controls.MaterialLabel();
+            materialLabel24 = new MaterialSkin.Controls.MaterialLabel();
+            panel4 = new Panel();
+            materialLabel19 = new MaterialSkin.Controls.MaterialLabel();
+            archiveClearButton = new MaterialSkin.Controls.MaterialButton();
+            restoreButton = new MaterialSkin.Controls.MaterialButton();
+            archiveTable = new DataGridView();
+            archiveIdColumn = new DataGridViewTextBoxColumn();
+            archiveNameColumn = new DataGridViewTextBoxColumn();
+            archiveEmailColumn = new DataGridViewTextBoxColumn();
+            archivePositionColumn = new DataGridViewTextBoxColumn();
+            archivePositionCb = new MaterialSkin.Controls.MaterialComboBox();
+            archiveIdTxt = new MaterialSkin.Controls.MaterialTextBox();
+            archiveEmailTxt = new MaterialSkin.Controls.MaterialTextBox();
+            materialLabel20 = new MaterialSkin.Controls.MaterialLabel();
+            archiveNameTxt = new MaterialSkin.Controls.MaterialTextBox();
             materialTabControl1.SuspendLayout();
             employeeTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)employeesTable).BeginInit();
@@ -85,6 +126,12 @@
             payrollTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)payrollTable).BeginInit();
             panel2.SuspendLayout();
+            historyTab.SuspendLayout();
+            panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)historyTable).BeginInit();
+            archiveTab.SuspendLayout();
+            panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)archiveTable).BeginInit();
             SuspendLayout();
             // 
             // imageList1
@@ -95,12 +142,14 @@
             imageList1.Images.SetKeyName(0, "history.png");
             imageList1.Images.SetKeyName(1, "cash.png");
             imageList1.Images.SetKeyName(2, "account-tie.png");
+            imageList1.Images.SetKeyName(3, "account-convert.png");
             // 
             // materialTabControl1
             // 
             materialTabControl1.Controls.Add(employeeTab);
             materialTabControl1.Controls.Add(payrollTab);
             materialTabControl1.Controls.Add(historyTab);
+            materialTabControl1.Controls.Add(archiveTab);
             materialTabControl1.Depth = 0;
             materialTabControl1.Dock = DockStyle.Fill;
             materialTabControl1.ImageList = imageList1;
@@ -230,7 +279,7 @@
             materialLabel6.Depth = 0;
             materialLabel6.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             materialLabel6.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            materialLabel6.Location = new Point(594, 138);
+            materialLabel6.Location = new Point(593, 138);
             materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel6.Name = "materialLabel6";
             materialLabel6.Size = new Size(54, 17);
@@ -243,7 +292,7 @@
             materialLabel5.Depth = 0;
             materialLabel5.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             materialLabel5.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            materialLabel5.Location = new Point(365, 138);
+            materialLabel5.Location = new Point(364, 138);
             materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel5.Name = "materialLabel5";
             materialLabel5.Size = new Size(37, 17);
@@ -256,7 +305,7 @@
             materialLabel4.Depth = 0;
             materialLabel4.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             materialLabel4.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            materialLabel4.Location = new Point(133, 140);
+            materialLabel4.Location = new Point(132, 140);
             materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel4.Name = "materialLabel4";
             materialLabel4.Size = new Size(39, 17);
@@ -282,27 +331,28 @@
             employeesTable.AutoGenerateColumns = false;
             employeesTable.BackgroundColor = Color.FromArgb(50, 50, 50);
             employeesTable.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(30, 30, 30);
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 11F);
-            dataGridViewCellStyle5.ForeColor = Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            employeesTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = Color.FromArgb(30, 30, 30);
+            dataGridViewCellStyle9.Font = new Font("Segoe UI", 11F);
+            dataGridViewCellStyle9.ForeColor = Color.White;
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            employeesTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             employeesTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             employeesTable.Columns.AddRange(new DataGridViewColumn[] { employeeIdColumn, employeeNameColumn, employeeEmailColumn, employeePositonColumn });
             employeesTable.DataSource = addedIsActiveBindingSource;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.FromArgb(45, 45, 48);
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 11F);
-            dataGridViewCellStyle6.ForeColor = Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(0, 122, 204);
-            dataGridViewCellStyle6.SelectionForeColor = Color.White;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            employeesTable.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = Color.FromArgb(45, 45, 48);
+            dataGridViewCellStyle10.Font = new Font("Segoe UI", 11F);
+            dataGridViewCellStyle10.ForeColor = Color.White;
+            dataGridViewCellStyle10.SelectionBackColor = Color.FromArgb(0, 122, 204);
+            dataGridViewCellStyle10.SelectionForeColor = Color.White;
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
+            employeesTable.DefaultCellStyle = dataGridViewCellStyle10;
             employeesTable.EnableHeadersVisualStyles = false;
             employeesTable.Location = new Point(20, 216);
+            employeesTable.MaximumSize = new Size(768, 236);
             employeesTable.MultiSelect = false;
             employeesTable.Name = "employeesTable";
             employeesTable.ReadOnly = true;
@@ -456,6 +506,8 @@
             // payrollTab
             // 
             payrollTab.BackColor = Color.White;
+            payrollTab.Controls.Add(payrollClearButton);
+            payrollTab.Controls.Add(payrollPositionTxt);
             payrollTab.Controls.Add(payEmployeeButton);
             payrollTab.Controls.Add(materialLabel12);
             payrollTab.Controls.Add(payrollTable);
@@ -464,7 +516,6 @@
             payrollTab.Controls.Add(materialLabel10);
             payrollTab.Controls.Add(materialLabel11);
             payrollTab.Controls.Add(payrollSalaryTxt);
-            payrollTab.Controls.Add(payrollEmailTxt);
             payrollTab.Controls.Add(payrollIdTxt);
             payrollTab.Controls.Add(payrollNameTxt);
             payrollTab.Controls.Add(panel2);
@@ -476,6 +527,44 @@
             payrollTab.TabIndex = 1;
             payrollTab.Text = "Payroll";
             // 
+            // payrollClearButton
+            // 
+            payrollClearButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            payrollClearButton.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            payrollClearButton.Depth = 0;
+            payrollClearButton.HighEmphasis = true;
+            payrollClearButton.Icon = null;
+            payrollClearButton.Location = new Point(722, 86);
+            payrollClearButton.Margin = new Padding(4, 6, 4, 6);
+            payrollClearButton.MouseState = MaterialSkin.MouseState.HOVER;
+            payrollClearButton.Name = "payrollClearButton";
+            payrollClearButton.NoAccentTextColor = Color.Empty;
+            payrollClearButton.Size = new Size(66, 36);
+            payrollClearButton.TabIndex = 19;
+            payrollClearButton.Text = "Clear";
+            payrollClearButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            payrollClearButton.UseAccentColor = false;
+            payrollClearButton.UseVisualStyleBackColor = true;
+            payrollClearButton.Click += payrollClearButton_Click;
+            // 
+            // payrollPositionTxt
+            // 
+            payrollPositionTxt.AnimateReadOnly = false;
+            payrollPositionTxt.BorderStyle = BorderStyle.None;
+            payrollPositionTxt.Depth = 0;
+            payrollPositionTxt.Enabled = false;
+            payrollPositionTxt.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            payrollPositionTxt.LeadingIcon = null;
+            payrollPositionTxt.Location = new Point(364, 160);
+            payrollPositionTxt.MaxLength = 50;
+            payrollPositionTxt.MouseState = MaterialSkin.MouseState.OUT;
+            payrollPositionTxt.Multiline = false;
+            payrollPositionTxt.Name = "payrollPositionTxt";
+            payrollPositionTxt.Size = new Size(195, 50);
+            payrollPositionTxt.TabIndex = 18;
+            payrollPositionTxt.Text = "";
+            payrollPositionTxt.TrailingIcon = null;
+            // 
             // payEmployeeButton
             // 
             payEmployeeButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -483,7 +572,7 @@
             payEmployeeButton.Depth = 0;
             payEmployeeButton.HighEmphasis = true;
             payEmployeeButton.Icon = null;
-            payEmployeeButton.Location = new Point(660, 86);
+            payEmployeeButton.Location = new Point(586, 86);
             payEmployeeButton.Margin = new Padding(4, 6, 4, 6);
             payEmployeeButton.MouseState = MaterialSkin.MouseState.HOVER;
             payEmployeeButton.Name = "payEmployeeButton";
@@ -515,25 +604,25 @@
             payrollTable.AutoGenerateColumns = false;
             payrollTable.BackgroundColor = Color.FromArgb(50, 50, 50);
             payrollTable.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(30, 30, 30);
-            dataGridViewCellStyle7.Font = new Font("Segoe UI", 11F);
-            dataGridViewCellStyle7.ForeColor = Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            payrollTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = Color.FromArgb(30, 30, 30);
+            dataGridViewCellStyle11.Font = new Font("Segoe UI", 11F);
+            dataGridViewCellStyle11.ForeColor = Color.White;
+            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            payrollTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             payrollTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             payrollTable.Columns.AddRange(new DataGridViewColumn[] { payrollIdColumn, payrollNameColumn, payrollPositionColumn, paryollSalaryColumn });
             payrollTable.DataSource = addedIsActiveBindingSource;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.FromArgb(45, 45, 48);
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 11F);
-            dataGridViewCellStyle8.ForeColor = Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = Color.FromArgb(0, 122, 204);
-            dataGridViewCellStyle8.SelectionForeColor = Color.White;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
-            payrollTable.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = Color.FromArgb(45, 45, 48);
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 11F);
+            dataGridViewCellStyle12.ForeColor = Color.White;
+            dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(0, 122, 204);
+            dataGridViewCellStyle12.SelectionForeColor = Color.White;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
+            payrollTable.DefaultCellStyle = dataGridViewCellStyle12;
             payrollTable.EnableHeadersVisualStyles = false;
             payrollTable.Location = new Point(20, 216);
             payrollTable.MultiSelect = false;
@@ -544,6 +633,7 @@
             payrollTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             payrollTable.Size = new Size(768, 236);
             payrollTable.TabIndex = 15;
+            payrollTable.SelectionChanged += payrollTable_SelectionChanged;
             // 
             // payrollIdColumn
             // 
@@ -568,7 +658,7 @@
             // 
             // paryollSalaryColumn
             // 
-            paryollSalaryColumn.HeaderText = "Salary";
+            paryollSalaryColumn.HeaderText = "Salary (PHP)";
             paryollSalaryColumn.Name = "paryollSalaryColumn";
             paryollSalaryColumn.ReadOnly = true;
             paryollSalaryColumn.Resizable = DataGridViewTriState.True;
@@ -580,7 +670,7 @@
             materialLabel8.Depth = 0;
             materialLabel8.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             materialLabel8.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            materialLabel8.Location = new Point(566, 139);
+            materialLabel8.Location = new Point(565, 138);
             materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel8.Name = "materialLabel8";
             materialLabel8.Size = new Size(41, 17);
@@ -593,7 +683,7 @@
             materialLabel9.Depth = 0;
             materialLabel9.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             materialLabel9.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            materialLabel9.Location = new Point(365, 139);
+            materialLabel9.Location = new Point(364, 138);
             materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel9.Name = "materialLabel9";
             materialLabel9.Size = new Size(54, 17);
@@ -606,7 +696,7 @@
             materialLabel10.Depth = 0;
             materialLabel10.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             materialLabel10.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            materialLabel10.Location = new Point(133, 141);
+            materialLabel10.Location = new Point(132, 140);
             materialLabel10.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel10.Name = "materialLabel10";
             materialLabel10.Size = new Size(39, 17);
@@ -619,7 +709,7 @@
             materialLabel11.Depth = 0;
             materialLabel11.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
             materialLabel11.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            materialLabel11.Location = new Point(21, 139);
+            materialLabel11.Location = new Point(21, 138);
             materialLabel11.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel11.Name = "materialLabel11";
             materialLabel11.Size = new Size(14, 17);
@@ -643,30 +733,6 @@
             payrollSalaryTxt.TabIndex = 9;
             payrollSalaryTxt.Text = "";
             payrollSalaryTxt.TrailingIcon = null;
-            // 
-            // payrollEmailTxt
-            // 
-            payrollEmailTxt.AutoResize = false;
-            payrollEmailTxt.BackColor = Color.FromArgb(255, 255, 255);
-            payrollEmailTxt.Depth = 0;
-            payrollEmailTxt.DrawMode = DrawMode.OwnerDrawVariable;
-            payrollEmailTxt.DropDownHeight = 174;
-            payrollEmailTxt.DropDownStyle = ComboBoxStyle.DropDownList;
-            payrollEmailTxt.DropDownWidth = 121;
-            payrollEmailTxt.Enabled = false;
-            payrollEmailTxt.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
-            payrollEmailTxt.ForeColor = Color.FromArgb(222, 0, 0, 0);
-            payrollEmailTxt.FormattingEnabled = true;
-            payrollEmailTxt.IntegralHeight = false;
-            payrollEmailTxt.ItemHeight = 43;
-            payrollEmailTxt.Items.AddRange(new object[] { "Select Position", "Software Engineer ", "DevOps Engineer", "Tech Lead", "Front-end Developer", "Backend Developer", "Intern" });
-            payrollEmailTxt.Location = new Point(364, 159);
-            payrollEmailTxt.MaxDropDownItems = 4;
-            payrollEmailTxt.MouseState = MaterialSkin.MouseState.OUT;
-            payrollEmailTxt.Name = "payrollEmailTxt";
-            payrollEmailTxt.Size = new Size(195, 49);
-            payrollEmailTxt.StartIndex = 0;
-            payrollEmailTxt.TabIndex = 8;
             // 
             // payrollIdTxt
             // 
@@ -732,12 +798,571 @@
             // historyTab
             // 
             historyTab.BackColor = Color.White;
+            historyTab.Controls.Add(historyClearButton);
+            historyTab.Controls.Add(panel3);
+            historyTab.Controls.Add(materialLabel15);
+            historyTab.Controls.Add(materialLabel16);
+            historyTab.Controls.Add(materialLabel17);
+            historyTab.Controls.Add(materialLabel18);
+            historyTab.Controls.Add(historyPositionTxt);
+            historyTab.Controls.Add(materialLabel13);
+            historyTab.Controls.Add(historyTable);
+            historyTab.Controls.Add(historyAmountTxt);
+            historyTab.Controls.Add(historyDateTxt);
+            historyTab.Controls.Add(historyNameTxt);
             historyTab.ImageKey = "history.png";
             historyTab.Location = new Point(4, 24);
             historyTab.Name = "historyTab";
             historyTab.Size = new Size(853, 458);
             historyTab.TabIndex = 2;
             historyTab.Text = "History";
+            // 
+            // historyClearButton
+            // 
+            historyClearButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            historyClearButton.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            historyClearButton.Depth = 0;
+            historyClearButton.HighEmphasis = true;
+            historyClearButton.Icon = null;
+            historyClearButton.Location = new Point(722, 86);
+            historyClearButton.Margin = new Padding(4, 6, 4, 6);
+            historyClearButton.MouseState = MaterialSkin.MouseState.HOVER;
+            historyClearButton.Name = "historyClearButton";
+            historyClearButton.NoAccentTextColor = Color.Empty;
+            historyClearButton.Size = new Size(66, 36);
+            historyClearButton.TabIndex = 31;
+            historyClearButton.Text = "Clear";
+            historyClearButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            historyClearButton.UseAccentColor = false;
+            historyClearButton.UseVisualStyleBackColor = true;
+            historyClearButton.Click += historyClearButton_Click;
+            // 
+            // panel3
+            // 
+            panel3.BorderStyle = BorderStyle.FixedSingle;
+            panel3.Controls.Add(materialLabel14);
+            panel3.Location = new Point(3, 3);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(847, 50);
+            panel3.TabIndex = 30;
+            // 
+            // materialLabel14
+            // 
+            materialLabel14.AutoSize = true;
+            materialLabel14.BackColor = Color.White;
+            materialLabel14.Depth = 0;
+            materialLabel14.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialLabel14.ForeColor = Color.White;
+            materialLabel14.Location = new Point(18, 16);
+            materialLabel14.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel14.Name = "materialLabel14";
+            materialLabel14.Size = new Size(140, 19);
+            materialLabel14.TabIndex = 1;
+            materialLabel14.Text = "Transaction History";
+            // 
+            // materialLabel15
+            // 
+            materialLabel15.AutoSize = true;
+            materialLabel15.Depth = 0;
+            materialLabel15.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
+            materialLabel15.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
+            materialLabel15.Location = new Point(656, 138);
+            materialLabel15.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel15.Name = "materialLabel15";
+            materialLabel15.Size = new Size(51, 17);
+            materialLabel15.TabIndex = 29;
+            materialLabel15.Text = "Amount";
+            // 
+            // materialLabel16
+            // 
+            materialLabel16.AutoSize = true;
+            materialLabel16.Depth = 0;
+            materialLabel16.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
+            materialLabel16.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
+            materialLabel16.Location = new Point(469, 138);
+            materialLabel16.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel16.Name = "materialLabel16";
+            materialLabel16.Size = new Size(54, 17);
+            materialLabel16.TabIndex = 28;
+            materialLabel16.Text = "Position";
+            // 
+            // materialLabel17
+            // 
+            materialLabel17.AutoSize = true;
+            materialLabel17.Depth = 0;
+            materialLabel17.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
+            materialLabel17.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
+            materialLabel17.Location = new Point(237, 140);
+            materialLabel17.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel17.Name = "materialLabel17";
+            materialLabel17.Size = new Size(105, 17);
+            materialLabel17.TabIndex = 27;
+            materialLabel17.Text = "Employee Name";
+            // 
+            // materialLabel18
+            // 
+            materialLabel18.AutoSize = true;
+            materialLabel18.Depth = 0;
+            materialLabel18.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
+            materialLabel18.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
+            materialLabel18.Location = new Point(21, 138);
+            materialLabel18.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel18.Name = "materialLabel18";
+            materialLabel18.Size = new Size(31, 17);
+            materialLabel18.TabIndex = 26;
+            materialLabel18.Text = "Date";
+            // 
+            // historyPositionTxt
+            // 
+            historyPositionTxt.AnimateReadOnly = false;
+            historyPositionTxt.BorderStyle = BorderStyle.None;
+            historyPositionTxt.Depth = 0;
+            historyPositionTxt.Enabled = false;
+            historyPositionTxt.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            historyPositionTxt.LeadingIcon = null;
+            historyPositionTxt.Location = new Point(469, 160);
+            historyPositionTxt.MaxLength = 50;
+            historyPositionTxt.MouseState = MaterialSkin.MouseState.OUT;
+            historyPositionTxt.Multiline = false;
+            historyPositionTxt.Name = "historyPositionTxt";
+            historyPositionTxt.Size = new Size(181, 50);
+            historyPositionTxt.TabIndex = 25;
+            historyPositionTxt.Text = "";
+            historyPositionTxt.TrailingIcon = null;
+            // 
+            // materialLabel13
+            // 
+            materialLabel13.AutoSize = true;
+            materialLabel13.BackColor = Color.White;
+            materialLabel13.Depth = 0;
+            materialLabel13.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialLabel13.Location = new Point(21, 96);
+            materialLabel13.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel13.Name = "materialLabel13";
+            materialLabel13.Size = new Size(143, 19);
+            materialLabel13.TabIndex = 24;
+            materialLabel13.Text = "Salary Transactions";
+            // 
+            // historyTable
+            // 
+            historyTable.AllowUserToResizeRows = false;
+            historyTable.AutoGenerateColumns = false;
+            historyTable.BackgroundColor = Color.FromArgb(50, 50, 50);
+            historyTable.BorderStyle = BorderStyle.None;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = Color.FromArgb(30, 30, 30);
+            dataGridViewCellStyle13.Font = new Font("Segoe UI", 11F);
+            dataGridViewCellStyle13.ForeColor = Color.White;
+            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
+            historyTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            historyTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            historyTable.Columns.AddRange(new DataGridViewColumn[] { historyDateColumn, historyEmployeeName, historyPosition, historyAmount });
+            historyTable.DataSource = addedIsActiveBindingSource;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = Color.FromArgb(45, 45, 48);
+            dataGridViewCellStyle14.Font = new Font("Segoe UI", 11F);
+            dataGridViewCellStyle14.ForeColor = Color.White;
+            dataGridViewCellStyle14.SelectionBackColor = Color.FromArgb(0, 122, 204);
+            dataGridViewCellStyle14.SelectionForeColor = Color.White;
+            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.False;
+            historyTable.DefaultCellStyle = dataGridViewCellStyle14;
+            historyTable.EnableHeadersVisualStyles = false;
+            historyTable.Location = new Point(20, 216);
+            historyTable.MultiSelect = false;
+            historyTable.Name = "historyTable";
+            historyTable.ReadOnly = true;
+            historyTable.RowHeadersVisible = false;
+            historyTable.ScrollBars = ScrollBars.Vertical;
+            historyTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            historyTable.Size = new Size(768, 236);
+            historyTable.TabIndex = 23;
+            historyTable.SelectionChanged += historyTable_SelectionChanged;
+            // 
+            // historyDateColumn
+            // 
+            historyDateColumn.HeaderText = "Date";
+            historyDateColumn.Name = "historyDateColumn";
+            historyDateColumn.ReadOnly = true;
+            historyDateColumn.Width = 190;
+            // 
+            // historyEmployeeName
+            // 
+            historyEmployeeName.HeaderText = "Employee Name";
+            historyEmployeeName.Name = "historyEmployeeName";
+            historyEmployeeName.ReadOnly = true;
+            historyEmployeeName.Width = 210;
+            // 
+            // historyPosition
+            // 
+            historyPosition.HeaderText = "Position";
+            historyPosition.Name = "historyPosition";
+            historyPosition.ReadOnly = true;
+            historyPosition.Width = 215;
+            // 
+            // historyAmount
+            // 
+            historyAmount.HeaderText = "Amount (PHP)";
+            historyAmount.Name = "historyAmount";
+            historyAmount.ReadOnly = true;
+            historyAmount.Resizable = DataGridViewTriState.True;
+            historyAmount.Width = 150;
+            // 
+            // historyAmountTxt
+            // 
+            historyAmountTxt.AnimateReadOnly = false;
+            historyAmountTxt.BorderStyle = BorderStyle.None;
+            historyAmountTxt.Depth = 0;
+            historyAmountTxt.Enabled = false;
+            historyAmountTxt.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            historyAmountTxt.LeadingIcon = null;
+            historyAmountTxt.Location = new Point(656, 160);
+            historyAmountTxt.MaxLength = 50;
+            historyAmountTxt.MouseState = MaterialSkin.MouseState.OUT;
+            historyAmountTxt.Multiline = false;
+            historyAmountTxt.Name = "historyAmountTxt";
+            historyAmountTxt.Size = new Size(132, 50);
+            historyAmountTxt.TabIndex = 22;
+            historyAmountTxt.Text = "";
+            historyAmountTxt.TrailingIcon = null;
+            // 
+            // historyDateTxt
+            // 
+            historyDateTxt.AnimateReadOnly = false;
+            historyDateTxt.BorderStyle = BorderStyle.None;
+            historyDateTxt.Depth = 0;
+            historyDateTxt.Enabled = false;
+            historyDateTxt.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            historyDateTxt.LeadingIcon = null;
+            historyDateTxt.Location = new Point(20, 160);
+            historyDateTxt.MaxLength = 50;
+            historyDateTxt.MouseState = MaterialSkin.MouseState.OUT;
+            historyDateTxt.Multiline = false;
+            historyDateTxt.Name = "historyDateTxt";
+            historyDateTxt.Size = new Size(211, 50);
+            historyDateTxt.TabIndex = 21;
+            historyDateTxt.Text = "";
+            historyDateTxt.TrailingIcon = null;
+            // 
+            // historyNameTxt
+            // 
+            historyNameTxt.AnimateReadOnly = false;
+            historyNameTxt.BorderStyle = BorderStyle.None;
+            historyNameTxt.Depth = 0;
+            historyNameTxt.Enabled = false;
+            historyNameTxt.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            historyNameTxt.LeadingIcon = null;
+            historyNameTxt.Location = new Point(237, 160);
+            historyNameTxt.MaxLength = 50;
+            historyNameTxt.MouseState = MaterialSkin.MouseState.OUT;
+            historyNameTxt.Multiline = false;
+            historyNameTxt.Name = "historyNameTxt";
+            historyNameTxt.Size = new Size(226, 50);
+            historyNameTxt.TabIndex = 20;
+            historyNameTxt.Text = "";
+            historyNameTxt.TrailingIcon = null;
+            // 
+            // archiveTab
+            // 
+            archiveTab.BackColor = Color.White;
+            archiveTab.Controls.Add(materialLabel21);
+            archiveTab.Controls.Add(materialLabel22);
+            archiveTab.Controls.Add(materialLabel23);
+            archiveTab.Controls.Add(materialLabel24);
+            archiveTab.Controls.Add(panel4);
+            archiveTab.Controls.Add(archiveClearButton);
+            archiveTab.Controls.Add(restoreButton);
+            archiveTab.Controls.Add(archiveTable);
+            archiveTab.Controls.Add(archivePositionCb);
+            archiveTab.Controls.Add(archiveIdTxt);
+            archiveTab.Controls.Add(archiveEmailTxt);
+            archiveTab.Controls.Add(materialLabel20);
+            archiveTab.Controls.Add(archiveNameTxt);
+            archiveTab.ImageKey = "account-convert.png";
+            archiveTab.Location = new Point(4, 24);
+            archiveTab.Name = "archiveTab";
+            archiveTab.Size = new Size(853, 458);
+            archiveTab.TabIndex = 3;
+            archiveTab.Text = "Employee Archive";
+            // 
+            // materialLabel21
+            // 
+            materialLabel21.AutoSize = true;
+            materialLabel21.Depth = 0;
+            materialLabel21.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
+            materialLabel21.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
+            materialLabel21.Location = new Point(594, 141);
+            materialLabel21.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel21.Name = "materialLabel21";
+            materialLabel21.Size = new Size(54, 17);
+            materialLabel21.TabIndex = 27;
+            materialLabel21.Text = "Position";
+            // 
+            // materialLabel22
+            // 
+            materialLabel22.AutoSize = true;
+            materialLabel22.Depth = 0;
+            materialLabel22.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
+            materialLabel22.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
+            materialLabel22.Location = new Point(365, 141);
+            materialLabel22.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel22.Name = "materialLabel22";
+            materialLabel22.Size = new Size(37, 17);
+            materialLabel22.TabIndex = 26;
+            materialLabel22.Text = "Email";
+            // 
+            // materialLabel23
+            // 
+            materialLabel23.AutoSize = true;
+            materialLabel23.Depth = 0;
+            materialLabel23.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
+            materialLabel23.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
+            materialLabel23.Location = new Point(133, 143);
+            materialLabel23.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel23.Name = "materialLabel23";
+            materialLabel23.Size = new Size(39, 17);
+            materialLabel23.TabIndex = 25;
+            materialLabel23.Text = "Name";
+            // 
+            // materialLabel24
+            // 
+            materialLabel24.AutoSize = true;
+            materialLabel24.Depth = 0;
+            materialLabel24.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
+            materialLabel24.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
+            materialLabel24.Location = new Point(22, 141);
+            materialLabel24.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel24.Name = "materialLabel24";
+            materialLabel24.Size = new Size(14, 17);
+            materialLabel24.TabIndex = 24;
+            materialLabel24.Text = "ID";
+            // 
+            // panel4
+            // 
+            panel4.BackColor = Color.White;
+            panel4.BorderStyle = BorderStyle.FixedSingle;
+            panel4.Controls.Add(materialLabel19);
+            panel4.Dock = DockStyle.Top;
+            panel4.Location = new Point(0, 0);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(853, 50);
+            panel4.TabIndex = 15;
+            // 
+            // materialLabel19
+            // 
+            materialLabel19.AutoSize = true;
+            materialLabel19.BackColor = Color.White;
+            materialLabel19.Depth = 0;
+            materialLabel19.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialLabel19.ForeColor = Color.White;
+            materialLabel19.Location = new Point(18, 16);
+            materialLabel19.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel19.Name = "materialLabel19";
+            materialLabel19.Size = new Size(53, 19);
+            materialLabel19.TabIndex = 0;
+            materialLabel19.Text = "Archive";
+            // 
+            // archiveClearButton
+            // 
+            archiveClearButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            archiveClearButton.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            archiveClearButton.Depth = 0;
+            archiveClearButton.HighEmphasis = true;
+            archiveClearButton.Icon = null;
+            archiveClearButton.Location = new Point(722, 89);
+            archiveClearButton.Margin = new Padding(4, 6, 4, 6);
+            archiveClearButton.MouseState = MaterialSkin.MouseState.HOVER;
+            archiveClearButton.Name = "archiveClearButton";
+            archiveClearButton.NoAccentTextColor = Color.Empty;
+            archiveClearButton.Padding = new Padding(5, 5, 0, 0);
+            archiveClearButton.Size = new Size(66, 36);
+            archiveClearButton.TabIndex = 23;
+            archiveClearButton.Text = "Clear";
+            archiveClearButton.TextAlign = ContentAlignment.MiddleLeft;
+            archiveClearButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            archiveClearButton.UseAccentColor = false;
+            archiveClearButton.UseVisualStyleBackColor = true;
+            archiveClearButton.Click += archiveClearButton_Click;
+            // 
+            // restoreButton
+            // 
+            restoreButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            restoreButton.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            restoreButton.Depth = 0;
+            restoreButton.HighEmphasis = true;
+            restoreButton.Icon = null;
+            restoreButton.Location = new Point(630, 89);
+            restoreButton.Margin = new Padding(4, 6, 4, 6);
+            restoreButton.MouseState = MaterialSkin.MouseState.HOVER;
+            restoreButton.Name = "restoreButton";
+            restoreButton.NoAccentTextColor = Color.Empty;
+            restoreButton.Padding = new Padding(0, 10, 10, 0);
+            restoreButton.Size = new Size(84, 36);
+            restoreButton.TabIndex = 22;
+            restoreButton.Text = "Restore";
+            restoreButton.TextAlign = ContentAlignment.MiddleLeft;
+            restoreButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            restoreButton.UseAccentColor = false;
+            restoreButton.UseVisualStyleBackColor = true;
+            restoreButton.Click += restoreButton_Click;
+            // 
+            // archiveTable
+            // 
+            archiveTable.AllowUserToResizeRows = false;
+            archiveTable.AutoGenerateColumns = false;
+            archiveTable.BackgroundColor = Color.FromArgb(50, 50, 50);
+            archiveTable.BorderStyle = BorderStyle.None;
+            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = Color.FromArgb(30, 30, 30);
+            dataGridViewCellStyle15.Font = new Font("Segoe UI", 11F);
+            dataGridViewCellStyle15.ForeColor = Color.White;
+            dataGridViewCellStyle15.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.True;
+            archiveTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            archiveTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            archiveTable.Columns.AddRange(new DataGridViewColumn[] { archiveIdColumn, archiveNameColumn, archiveEmailColumn, archivePositionColumn });
+            archiveTable.DataSource = addedIsActiveBindingSource;
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = Color.FromArgb(45, 45, 48);
+            dataGridViewCellStyle16.Font = new Font("Segoe UI", 11F);
+            dataGridViewCellStyle16.ForeColor = Color.White;
+            dataGridViewCellStyle16.SelectionBackColor = Color.FromArgb(0, 122, 204);
+            dataGridViewCellStyle16.SelectionForeColor = Color.White;
+            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.False;
+            archiveTable.DefaultCellStyle = dataGridViewCellStyle16;
+            archiveTable.EnableHeadersVisualStyles = false;
+            archiveTable.Location = new Point(20, 219);
+            archiveTable.MaximumSize = new Size(768, 236);
+            archiveTable.MultiSelect = false;
+            archiveTable.Name = "archiveTable";
+            archiveTable.ReadOnly = true;
+            archiveTable.RowHeadersVisible = false;
+            archiveTable.ScrollBars = ScrollBars.Vertical;
+            archiveTable.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            archiveTable.Size = new Size(768, 236);
+            archiveTable.TabIndex = 21;
+            archiveTable.SelectionChanged += archiveTable_SelectionChanged;
+            // 
+            // archiveIdColumn
+            // 
+            archiveIdColumn.HeaderText = "Employee ID";
+            archiveIdColumn.Name = "archiveIdColumn";
+            archiveIdColumn.ReadOnly = true;
+            archiveIdColumn.Width = 140;
+            // 
+            // archiveNameColumn
+            // 
+            archiveNameColumn.HeaderText = "Name";
+            archiveNameColumn.Name = "archiveNameColumn";
+            archiveNameColumn.ReadOnly = true;
+            archiveNameColumn.Width = 210;
+            // 
+            // archiveEmailColumn
+            // 
+            archiveEmailColumn.HeaderText = "Email";
+            archiveEmailColumn.Name = "archiveEmailColumn";
+            archiveEmailColumn.ReadOnly = true;
+            archiveEmailColumn.Width = 215;
+            // 
+            // archivePositionColumn
+            // 
+            archivePositionColumn.HeaderText = "Position";
+            archivePositionColumn.Name = "archivePositionColumn";
+            archivePositionColumn.ReadOnly = true;
+            archivePositionColumn.Width = 200;
+            // 
+            // archivePositionCb
+            // 
+            archivePositionCb.AutoResize = false;
+            archivePositionCb.BackColor = Color.FromArgb(255, 255, 255);
+            archivePositionCb.Depth = 0;
+            archivePositionCb.DrawMode = DrawMode.OwnerDrawVariable;
+            archivePositionCb.DropDownHeight = 174;
+            archivePositionCb.DropDownStyle = ComboBoxStyle.DropDownList;
+            archivePositionCb.DropDownWidth = 121;
+            archivePositionCb.Enabled = false;
+            archivePositionCb.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
+            archivePositionCb.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            archivePositionCb.FormattingEnabled = true;
+            archivePositionCb.IntegralHeight = false;
+            archivePositionCb.ItemHeight = 43;
+            archivePositionCb.Items.AddRange(new object[] { "Select Position", "Software Engineer ", "DevOps Engineer", "Tech Lead", "Front-end Developer", "Backend Developer", "Intern" });
+            archivePositionCb.Location = new Point(593, 163);
+            archivePositionCb.MaxDropDownItems = 4;
+            archivePositionCb.MouseState = MaterialSkin.MouseState.OUT;
+            archivePositionCb.Name = "archivePositionCb";
+            archivePositionCb.Size = new Size(195, 49);
+            archivePositionCb.StartIndex = 0;
+            archivePositionCb.TabIndex = 20;
+            // 
+            // archiveIdTxt
+            // 
+            archiveIdTxt.AnimateReadOnly = false;
+            archiveIdTxt.BorderStyle = BorderStyle.None;
+            archiveIdTxt.Depth = 0;
+            archiveIdTxt.Enabled = false;
+            archiveIdTxt.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            archiveIdTxt.LeadingIcon = null;
+            archiveIdTxt.Location = new Point(21, 163);
+            archiveIdTxt.MaxLength = 50;
+            archiveIdTxt.MouseState = MaterialSkin.MouseState.OUT;
+            archiveIdTxt.Multiline = false;
+            archiveIdTxt.Name = "archiveIdTxt";
+            archiveIdTxt.Size = new Size(106, 50);
+            archiveIdTxt.TabIndex = 19;
+            archiveIdTxt.Text = "";
+            archiveIdTxt.TrailingIcon = null;
+            // 
+            // archiveEmailTxt
+            // 
+            archiveEmailTxt.AnimateReadOnly = false;
+            archiveEmailTxt.BorderStyle = BorderStyle.None;
+            archiveEmailTxt.Depth = 0;
+            archiveEmailTxt.Enabled = false;
+            archiveEmailTxt.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            archiveEmailTxt.LeadingIcon = null;
+            archiveEmailTxt.Location = new Point(365, 163);
+            archiveEmailTxt.MaxLength = 50;
+            archiveEmailTxt.MouseState = MaterialSkin.MouseState.OUT;
+            archiveEmailTxt.Multiline = false;
+            archiveEmailTxt.Name = "archiveEmailTxt";
+            archiveEmailTxt.Size = new Size(223, 50);
+            archiveEmailTxt.TabIndex = 18;
+            archiveEmailTxt.Text = "";
+            archiveEmailTxt.TrailingIcon = null;
+            // 
+            // materialLabel20
+            // 
+            materialLabel20.AutoSize = true;
+            materialLabel20.BackColor = Color.White;
+            materialLabel20.Depth = 0;
+            materialLabel20.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialLabel20.Location = new Point(21, 99);
+            materialLabel20.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel20.Name = "materialLabel20";
+            materialLabel20.Size = new Size(134, 19);
+            materialLabel20.TabIndex = 16;
+            materialLabel20.Text = "Employees Archive";
+            // 
+            // archiveNameTxt
+            // 
+            archiveNameTxt.AnimateReadOnly = false;
+            archiveNameTxt.BorderStyle = BorderStyle.None;
+            archiveNameTxt.Depth = 0;
+            archiveNameTxt.Enabled = false;
+            archiveNameTxt.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            archiveNameTxt.LeadingIcon = null;
+            archiveNameTxt.Location = new Point(133, 163);
+            archiveNameTxt.MaxLength = 50;
+            archiveNameTxt.MouseState = MaterialSkin.MouseState.OUT;
+            archiveNameTxt.Multiline = false;
+            archiveNameTxt.Name = "archiveNameTxt";
+            archiveNameTxt.Size = new Size(226, 50);
+            archiveNameTxt.TabIndex = 17;
+            archiveNameTxt.Text = "";
+            archiveNameTxt.TrailingIcon = null;
             // 
             // Form1
             // 
@@ -762,6 +1387,16 @@
             ((System.ComponentModel.ISupportInitialize)payrollTable).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            historyTab.ResumeLayout(false);
+            historyTab.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)historyTable).EndInit();
+            archiveTab.ResumeLayout(false);
+            archiveTab.PerformLayout();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)archiveTable).EndInit();
             ResumeLayout(false);
         }
 
@@ -802,7 +1437,6 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel10;
         private MaterialSkin.Controls.MaterialLabel materialLabel11;
         private MaterialSkin.Controls.MaterialTextBox payrollSalaryTxt;
-        private MaterialSkin.Controls.MaterialComboBox payrollEmailTxt;
         private MaterialSkin.Controls.MaterialTextBox payrollIdTxt;
         private MaterialSkin.Controls.MaterialTextBox payrollNameTxt;
         private Panel panel2;
@@ -810,9 +1444,47 @@
         private DataGridView payrollTable;
         private MaterialSkin.Controls.MaterialLabel materialLabel12;
         private MaterialSkin.Controls.MaterialButton payEmployeeButton;
+        private MaterialSkin.Controls.MaterialTextBox payrollPositionTxt;
+        private MaterialSkin.Controls.MaterialButton payrollClearButton;
+        private MaterialSkin.Controls.MaterialLabel materialLabel15;
+        private MaterialSkin.Controls.MaterialLabel materialLabel16;
+        private MaterialSkin.Controls.MaterialLabel materialLabel17;
+        private MaterialSkin.Controls.MaterialLabel materialLabel18;
+        private MaterialSkin.Controls.MaterialTextBox historyPositionTxt;
+        private MaterialSkin.Controls.MaterialLabel materialLabel13;
+        private DataGridView historyTable;
+        private MaterialSkin.Controls.MaterialTextBox historyAmountTxt;
+        private MaterialSkin.Controls.MaterialTextBox historyDateTxt;
+        private MaterialSkin.Controls.MaterialTextBox historyNameTxt;
+        private Panel panel3;
+        private MaterialSkin.Controls.MaterialLabel materialLabel14;
+        private MaterialSkin.Controls.MaterialButton historyClearButton;
         private DataGridViewTextBoxColumn payrollIdColumn;
         private DataGridViewTextBoxColumn payrollNameColumn;
         private DataGridViewTextBoxColumn payrollPositionColumn;
         private DataGridViewTextBoxColumn paryollSalaryColumn;
+        private DataGridViewTextBoxColumn historyDateColumn;
+        private DataGridViewTextBoxColumn historyEmployeeName;
+        private DataGridViewTextBoxColumn historyPosition;
+        private DataGridViewTextBoxColumn historyAmount;
+        private TabPage archiveTab;
+        private Panel panel4;
+        private MaterialSkin.Controls.MaterialLabel materialLabel19;
+        private MaterialSkin.Controls.MaterialButton archiveClearButton;
+        private MaterialSkin.Controls.MaterialButton restoreButton;
+        private DataGridView archiveTable;
+        private MaterialSkin.Controls.MaterialComboBox archivePositionCb;
+        private MaterialSkin.Controls.MaterialTextBox archiveIdTxt;
+        private MaterialSkin.Controls.MaterialTextBox archiveEmailTxt;
+        private MaterialSkin.Controls.MaterialLabel materialLabel20;
+        private MaterialSkin.Controls.MaterialTextBox archiveNameTxt;
+        private MaterialSkin.Controls.MaterialLabel materialLabel21;
+        private MaterialSkin.Controls.MaterialLabel materialLabel22;
+        private MaterialSkin.Controls.MaterialLabel materialLabel23;
+        private MaterialSkin.Controls.MaterialLabel materialLabel24;
+        private DataGridViewTextBoxColumn archiveIdColumn;
+        private DataGridViewTextBoxColumn archiveNameColumn;
+        private DataGridViewTextBoxColumn archiveEmailColumn;
+        private DataGridViewTextBoxColumn archivePositionColumn;
     }
 }

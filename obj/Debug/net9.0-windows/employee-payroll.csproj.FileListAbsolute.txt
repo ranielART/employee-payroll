@@ -119,3 +119,4 @@ C:\Users\User\source\repos\employee-payroll\bin\Debug\net9.0-windows\Microsoft.E
 C:\Users\User\source\repos\employee-payroll\bin\Debug\net9.0-windows\Microsoft.Extensions.Options.ConfigurationExtensions.dll
 C:\Users\User\source\repos\employee-payroll\bin\Debug\net9.0-windows\System.Diagnostics.EventLog.dll
 C:\Users\User\source\repos\employee-payroll\bin\Debug\net9.0-windows\runtimes\win\lib\net9.0\System.Diagnostics.EventLog.dll
+C:\Users\User\source\repos\employee-payroll\obj\Debug\net9.0-windows\employee-payroll.sourcelink.json

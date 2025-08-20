@@ -12,9 +12,11 @@ namespace employee_payroll.IRepositories
         Task AddEmployee(Employee employee); 
         Task<Employee> GetEmployeeById(int id);
 
-        Task<List<Employee>> GetAllEmployees();
+        Task<List<Employee>> GetAllEmployees(Boolean isArchived);
 
         Task DeleteEmployee(int id);
+        Task RestoreEmployee(int id);
+
 
         Task<Employee> GetEmployeeByEmail(string email);
     }

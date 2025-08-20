@@ -33,9 +33,17 @@ namespace employee_payroll.Repositories
 
         }
 
-        public async Task<List<Employee>> GetAllEmployees()
+        public async Task RestoreEmployee(int id)
         {
-            var employees = await dbContext.employees.Where(e => e.is_active == true).ToListAsync();  
+            var employee = await dbContext.employees.FirstOrDefaultAsync(e => e.id == id && e.is_active == false);
+            employee.SetStatus(true);
+            await dbContext.SaveChangesAsync();
+
+        }
+
+        public async Task<List<Employee>> GetAllEmployees(Boolean isArchived)
+        {
+            var employees = await dbContext.employees.Where(e => e.is_active == !isArchived).ToListAsync();  
 
             return employees;
         }
@@ -49,7 +57,7 @@ namespace employee_payroll.Repositories
 
         public async Task<Employee> GetEmployeeById(int id)
         {
-            var employee = await dbContext.employees.FirstOrDefaultAsync(e => e.id == id && e.is_active == true);
+            var employee = await dbContext.employees.FirstOrDefaultAsync(e => e.id == id);
 
             return employee;
         }

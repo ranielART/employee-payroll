@@ -30,6 +30,7 @@ namespace employee_payroll
 
                     // Register repositories
                     services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+                    services.AddSingleton<IPayrollRepository, PayrollRepository>();
 
                     // Register Form1 so DI can create it
                     services.AddSingleton<Form1>();
