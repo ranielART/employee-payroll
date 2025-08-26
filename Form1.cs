@@ -29,6 +29,12 @@ namespace employee_payroll
             payEmployeeButton.Enabled = true;
             employeesTable.SelectionChanged += employeesTable_SelectionChanged;
             payrollTable.SelectionChanged += payrollTable_SelectionChanged;
+
+
+            fromDp.Value = DateTime.Today.AddMonths(-1); // Last Month
+            toDp.Value = DateTime.Today;
+
+
         }
 
         public Employee getEmployeeFields()
@@ -66,17 +72,48 @@ namespace employee_payroll
         public async Task loadEmployees()
         {
 
-
-
             addButton.Enabled = true;
             employeeIdColumn.DataPropertyName = "id";
             employeeNameColumn.DataPropertyName = "name";
             employeeEmailColumn.DataPropertyName = "email";
             employeePositonColumn.DataPropertyName = "position";
+            employeesDateHiredColumn.DataPropertyName = "DateHiredFormatted";
+            employeeLastPaidColumn.DataPropertyName = "LastPaidFormatted";
+            employeeDaysLeftColumn.DataPropertyName = "DaysUntilNextPayment";
 
-            await loadPeople(employeesTable);
+
+            employeesTable.DataSource = null;
+
+
+            var employees = await employeeRepository.GetAllEmployees();
+
+            if (employees != null && employees.Count > 0)
+            {
+
+                var formattedEmployees = employees.Select(e => new
+                {
+                    e.id,
+                    e.name,
+                    e.email,
+                    e.position,
+                    e.date_hired,
+                    DateHiredFormatted = e.date_hired.ToShortDateString(),
+                    LastPaidFormatted = e.last_payment_date.HasValue ? e.last_payment_date.Value.ToShortDateString() : "Never paid",
+                    DaysUntilNextPayment = e.DaysUntilNextPayment()
+                }).ToList();
+
+                employeesTable.DataSource = formattedEmployees;
+            }
+
+
+            if (employeesTable.Rows.Count > 0)
+            {
+                employeesTable.ClearSelection();
+            }
+            isInitialLoad = false;
+
+
             await loadPayrollEmployees();
-
         }
 
         public async Task loadArchiveEmployees()
@@ -88,51 +125,57 @@ namespace employee_payroll
 
             await loadArchivePeople(archiveTable);
 
-            
+
         }
 
         public async Task loadPayrollEmployees()
         {
-
             Dictionary<string, decimal> positionSalaries = new Dictionary<string, decimal>
-            {
-                { "Software Engineer", 35000.00m },
-                { "DevOps Engineer", 45000.00m },
-                { "Tech Lead", 70000.00m },
-                { "Front-end Developer", 28000.00m },
-                { "Backend Developer", 29000.00m },
-                { "Intern", 15000.00m }
-            };
-
+    {
+        { "Software Engineer", 35000.00m },
+        { "DevOps Engineer", 45000.00m },
+        { "Tech Lead", 70000.00m },
+        { "Front-end Developer", 28000.00m },
+        { "Backend Developer", 29000.00m },
+        { "Intern", 15000.00m }
+    };
 
             payrollIdColumn.DataPropertyName = "id";
             payrollNameColumn.DataPropertyName = "name";
             payrollPositionColumn.DataPropertyName = "position";
-
+            payrollLastPaidColumn.DataPropertyName = "LastPaymentFormatted";
             paryollSalaryColumn.DataPropertyName = "Salary";
 
             payrollTable.DataSource = null;
 
-            var employees = await employeeRepository.GetAllEmployees();
+            var employees = await payrollRepository.GetEmployeesEligibleForPayment();
+
+            // Always provide a list (even if empty) to prevent empty row display
+            var employeesWithSalary = new List<dynamic>();
+
             if (employees != null && employees.Count > 0)
             {
-                var employeesWithSalary = employees.Select(e => new
+                employeesWithSalary = employees.Select(e => new
                 {
                     e.id,
                     e.name,
                     e.position,
+                    e.last_payment_date,
+                    LastPaymentFormatted = e.last_payment_date.HasValue
+                        ? e.last_payment_date.Value.ToShortDateString()
+                        : "Never paid",
+                    DaysUntilNextPayment = e.DaysUntilNextPayment(),
                     Salary = positionSalaries.TryGetValue(e.position, out decimal salary) ? salary : 0m
-                }).ToList();
-
-                payrollTable.DataSource = employeesWithSalary;
-
+                }).ToList<dynamic>();
             }
+
+            payrollTable.DataSource = employeesWithSalary;
+
             if (payrollTable.Rows.Count > 0)
             {
                 payrollTable.ClearSelection();
             }
             isInitialPayrollLoad = false;
-
         }
 
         public async Task loadPeople(DataGridView dataTable)
@@ -174,9 +217,11 @@ namespace employee_payroll
 
         public void clearEmployeeFields()
         {
+            employeeIdLabel.Text = "N/A";
             addButton.Enabled = true;
             editButton.Enabled = false;
-            employeeIdTxt.Text = string.Empty;
+            employeeDateHiredTxt.Text = DateTime.Now.ToShortDateString();
+            //employeeIdTxt.Text = string.Empty;
             employeeeNameTxt.Text = string.Empty;
             employeePositionCb.Text = string.Empty;
             employeeEmailTxt.Text = string.Empty;
@@ -239,9 +284,11 @@ namespace employee_payroll
                 DataGridViewRow selectedRow = employeesTable.SelectedRows[0];
 
 
-                employeeIdTxt.Text = selectedRow.Cells[0].Value?.ToString() ?? string.Empty;
+                //employeeIdTxt.Text = selectedRow.Cells[0].Value?.ToString() ?? string.Empty;
                 employeeeNameTxt.Text = selectedRow.Cells[1].Value?.ToString() ?? string.Empty;
                 employeeEmailTxt.Text = selectedRow.Cells[2].Value?.ToString() ?? string.Empty;
+                employeeDateHiredTxt.Text = selectedRow.Cells[4].Value?.ToString() ?? string.Empty;
+                employeeIdLabel.Text = selectedRow.Cells[0].Value?.ToString() ?? "N/A";
 
                 switch (selectedRow.Cells[3].Value?.ToString())
                 {
@@ -301,6 +348,7 @@ namespace employee_payroll
         {
             //enableAddButton(true);
             addButton.Enabled = true;
+            employeeDateHiredTxt.Text = DateTime.Now.ToShortDateString();
             clearEmployeeFields();
             employeesTable.ClearSelection();
             employeePositionCb.SelectedIndex = 0;
@@ -313,7 +361,7 @@ namespace employee_payroll
 
             editButton.Enabled = false;
             payEmployeeButton.Enabled = false;
-
+            employeeDateHiredTxt.Text = DateTime.Now.ToShortDateString();
             await loadEmployees();
             await loadArchiveEmployees();
             await loadPayrollEmployees();
@@ -326,7 +374,15 @@ namespace employee_payroll
             {
                 validateEmployeeFields();
 
-                int employeeId = int.Parse(employeeIdTxt.Text.Trim());
+                //int employeeId = int.Parse(employeeIdTxt.Text.Trim());
+                if (employeeIdLabel.Text.Equals("N/A"))
+                {
+                    MessageBox.Show("Please select an employee to edit.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                int employeeId = int.Parse(employeeIdLabel.Text.Trim());
+
 
                 var currentEmployee = await employeeRepository.GetEmployeeById(employeeId);
                 if (currentEmployee == null)
@@ -349,6 +405,9 @@ namespace employee_payroll
                 currentEmployee.SetName(updatedEmployee.name);
                 currentEmployee.SetPosition(updatedEmployee.position);
 
+                await employeeRepository.UpdateEmployee(currentEmployee);
+
+
                 MessageBox.Show("Employee updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 await loadEmployees();
                 clearEmployeeFields();
@@ -364,7 +423,15 @@ namespace employee_payroll
 
             try
             {
-                int employeeId = int.Parse(employeeIdTxt.Text.Trim());
+
+
+                if (employeeIdLabel.Text.Equals("N/A"))
+                {
+                    MessageBox.Show("Please select an employee to edit.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                int employeeId = int.Parse(employeeIdLabel.Text.Trim());
 
                 var currentEmployee = await employeeRepository.GetEmployeeById(employeeId);
                 if (currentEmployee == null)
@@ -377,6 +444,7 @@ namespace employee_payroll
                 MessageBox.Show("Employee deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 await loadEmployees();
+                await loadPayrollEmployees();
                 await loadArchiveEmployees();
                 clearEmployeeFields();
 
@@ -401,22 +469,27 @@ namespace employee_payroll
 
         private async void materialButton1_Click(object sender, EventArgs e)
         {
-
-            var employeeId = payrollIdTxt.Text.Trim();
-            if (string.IsNullOrEmpty(employeeId) || !int.TryParse(employeeId, out int id))
+            try
             {
-                MessageBox.Show("Please select a valid employee from the payroll table.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                var employeeId = payrollIdTxt.Text.Trim();
+                if (string.IsNullOrEmpty(employeeId) || !int.TryParse(employeeId, out int id))
+                {
+                    MessageBox.Show("Please select a valid employee from the payroll table.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var payrollDetails = getPayrollDetails();
+
+                await payrollRepository.PayEmployee(payrollDetails);
+                MessageBox.Show("Employee paid successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                payrollClearFields();
+                await loadHistory();
+                await loadPayrollEmployees(); // Refresh the payroll table to remove paid employees
             }
-
-            var payrollDetails = getPayrollDetails();
-
-            await payrollRepository.PayEmployee(payrollDetails);
-            MessageBox.Show("Employee paid successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            payrollClearFields();
-            await loadHistory();
-
-
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Payment failed: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void payrollClearButton_Click(object sender, EventArgs e)
@@ -451,17 +524,27 @@ namespace employee_payroll
             isInitialPayrollLoad = false;
         }
 
-        private void historyClearButton_Click(object sender, EventArgs e)
+        private void clearHistoryFields()
         {
+
             historyDateTxt.Text = string.Empty;
             historyNameTxt.Text = string.Empty;
             historyPositionTxt.Text = string.Empty;
             historyAmountTxt.Text = string.Empty;
             historyTable.ClearSelection();
+
+        }
+
+        private async void historyClearButton_Click(object sender, EventArgs e)
+        {
+            fromDp.Value = DateTime.Today.AddMonths(-1); // Last Month
+            toDp.Value = DateTime.Today;
+            clearHistoryFields();
+            await loadHistory();
         }
 
         private async void restoreButton_Click(object sender, EventArgs e)
-        { 
+        {
             try
             {
                 int employeeId = int.Parse(archiveIdTxt.Text.Trim());
@@ -510,7 +593,7 @@ namespace employee_payroll
                 archiveIdTxt.Text = selectedRow.Cells[0].Value?.ToString() ?? string.Empty;
                 archiveNameTxt.Text = selectedRow.Cells[1].Value?.ToString() ?? string.Empty;
                 archiveEmailTxt.Text = selectedRow.Cells[2].Value?.ToString() ?? string.Empty;
-                
+
 
                 switch (selectedRow.Cells[3].Value?.ToString())
                 {
@@ -543,6 +626,125 @@ namespace employee_payroll
 
             }
             isInitialPayrollLoad = false;
+        }
+
+        private async void payEmployeeButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var employeeId = payrollIdTxt.Text.Trim();
+                if (string.IsNullOrEmpty(employeeId) || !int.TryParse(employeeId, out int id))
+                {
+                    MessageBox.Show("Please select a valid employee from the payroll table.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var payrollDetails = getPayrollDetails();
+
+                await payrollRepository.PayEmployee(payrollDetails);
+                MessageBox.Show("Employee paid successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                payrollClearFields();
+                await loadHistory();
+                await loadEmployees();
+                await loadPayrollEmployees();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Payment failed: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void materialButton1_Click_1(object sender, EventArgs e)
+        {
+
+
+            payrollTable.ClearSelection();
+            employeesTable.ClearSelection();
+            archiveTable.ClearSelection();
+            historyTable.ClearSelection();
+
+            await employeeRepository.RefreshData();
+            await payrollRepository.RefreshData();
+            await loadPayrollEmployees();
+            await loadEmployees();
+            await loadHistory();
+            await loadArchiveEmployees();
+
+        }
+
+        private async void applyFilterButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                clearHistoryFields();
+
+                DateTime fromDate = fromDp.Value.Date;
+                DateTime toDate = toDp.Value.Date.AddDays(1).AddTicks(-1); // Include the entire 'to' date
+
+                if (fromDate > toDate)
+                {
+                    MessageBox.Show("From date must be before or equal to To date",
+                                   "Invalid Date Range",
+                                   MessageBoxButtons.OK,
+                                   MessageBoxIcon.Warning);
+                    return;
+                }
+
+                await LoadFilteredHistory(fromDate, toDate);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error applying filter: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async Task LoadFilteredHistory(DateTime fromDate, DateTime toDate)
+        {
+            historyDateColumn.DataPropertyName = "date";
+            historyEmployeeName.DataPropertyName = "employee_name";
+            historyPosition.DataPropertyName = "position";
+            historyAmount.DataPropertyName = "amount_paid";
+
+            historyTable.DataSource = null;
+            var payrollHistory = await payrollRepository.GetPayrollsByDateRange(fromDate, toDate);
+
+            if (payrollHistory != null && payrollHistory.Count > 0)
+            {
+                historyTable.DataSource = payrollHistory;
+            }
+            else
+            {
+                historyTable.DataSource = new List<PayrollHistoryDto>();
+                MessageBox.Show("No payment records found in the selected date range.",
+                               "No Data",
+                               MessageBoxButtons.OK,
+                               MessageBoxIcon.Information);
+            }
+        }
+
+        private async void viewHistory_Click(object sender, EventArgs e)
+        {
+            if (employeeIdLabel.Text.Equals("N/A"))
+            {
+                MessageBox.Show("Please select an employee to view history.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int employeeId = int.Parse(employeeIdLabel.Text.Trim());
+
+
+            var currentEmployee = await employeeRepository.GetEmployeeById(employeeId);
+
+            if (currentEmployee == null)
+            {
+                MessageBox.Show("Employee not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var employeeForm = new EmployeeDataFrom(employeeId, payrollRepository, employeeRepository); 
+            employeeForm.ShowDialog();
+
         }
     }
 }

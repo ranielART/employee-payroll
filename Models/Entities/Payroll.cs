@@ -38,6 +38,9 @@ namespace employee_payroll.Models.Entities
             this.employee_position = employee_position;
         }
 
-
+        public void setDatePaid(DateTime date_paid)
+        {
+            this.date_paid = date_paid;
+        }
     }
 }

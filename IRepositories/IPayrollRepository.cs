@@ -10,9 +10,15 @@ namespace employee_payroll.IRepositories
 {
     public interface IPayrollRepository
     {
-        public Task PayEmployee(Payroll payroll);
+        public Task<bool> PayEmployee(Payroll payroll);
         public Task<List<PayrollHistoryDto>> GetAllPayrolls();
 
-         
+        public Task<List<Employee>> GetEmployeesEligibleForPayment();
+
+        public Task RefreshData();
+
+        Task<List<PayrollHistoryDto>> GetPayrollsByDateRange(DateTime fromDate, DateTime toDate);
+
+        Task<List<PayrollHistoryDto>> GetPayrollsByEmployeeId(int employeeId);
     }
 }

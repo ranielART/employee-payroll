@@ -9,7 +9,7 @@ namespace employee_payroll.Models.Entities
 {
     public abstract class Person
     {
-
+        protected Person() { }
         protected Person(string name, string email)
         {
             

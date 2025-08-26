@@ -15,10 +15,16 @@ namespace employee_payroll.IRepositories
         Task<List<Employee>> GetAllEmployees();
         Task<List<Employee>> GetAllArchivedEmployees();
 
+        Task<List<Employee>> GetEmployeesEligibleForPayment();
+
         Task DeleteEmployee(int id);
         Task RestoreEmployee(int id);
 
 
         Task<Employee> GetEmployeeByEmail(string email);
+
+        Task UpdateEmployee(Employee employee);
+        public Task RefreshData();
+
     }
 }

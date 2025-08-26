@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace employee_payroll.Repositories
 {
-    public class EmployeeRepository : IEmployeeRepository 
+    public class EmployeeRepository : IEmployeeRepository  
     { 
         private readonly ApplicationDbContext dbContext;
 
@@ -41,6 +41,12 @@ namespace employee_payroll.Repositories
 
         }
 
+        public async Task<List<Employee>> GetEmployeesEligibleForPayment()
+        {
+            var allActiveEmployees = await GetAllEmployees();
+            return allActiveEmployees.Where(e => e.IsEligibleForPaymentToday()).ToList();
+        }
+
         public async Task<List<Employee>> GetAllEmployees()
         {
             var employees = await dbContext.employees.Where(e => e.is_active == true).ToListAsync();  
@@ -69,6 +75,43 @@ namespace employee_payroll.Repositories
             return employee;
         }
 
-       
+        public async Task UpdateEmployee(Employee employee)
+        {
+            var existingEmployee = await dbContext.employees.FirstOrDefaultAsync(e => e.id == employee.id);
+            if (existingEmployee == null)
+                throw new Exception("Employee not found");
+
+            existingEmployee.SetName(employee.name);
+            existingEmployee.SetEmail(employee.email);
+            existingEmployee.SetPosition(employee.position);
+
+            // Note: is_active and date_hired are not updated here to preserve integrity
+            await dbContext.SaveChangesAsync();
+        }
+
+
+        public async Task DeleteEmployee(Employee employee)
+        {
+            var existingEmployee = await dbContext.employees.FirstOrDefaultAsync(e => e.id == employee.id);
+
+            existingEmployee.SetStatus(false);
+
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task RefreshData()
+        {
+            var trackedEntities = dbContext.ChangeTracker.Entries()
+                .Where(e => e.State != EntityState.Detached)
+                .ToList();
+
+            foreach (var entry in trackedEntities)
+            {
+                entry.State = EntityState.Detached;
+            }
+
+
+            await Task.CompletedTask;
+        }
     }
 }
