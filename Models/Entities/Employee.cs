@@ -86,7 +86,7 @@ namespace employee_payroll.Models.Entities
                 return (DateTime.Today - date_hired.Date).TotalDays >= 15;
             }
 
-            return (DateTime.Today - last_payment_date.Value.Date).TotalDays >= DaysUntilNextPayment() &&
+            return (DateTime.Today - last_payment_date.Value.Date).TotalDays >= 15 &&
                    last_payment_date.Value.Date != DateTime.Today;
         }
 

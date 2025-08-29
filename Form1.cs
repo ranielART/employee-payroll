@@ -81,8 +81,17 @@ namespace employee_payroll
             employeeLastPaidColumn.DataPropertyName = "LastPaidFormatted";
             employeeDaysLeftColumn.DataPropertyName = "DaysUntilNextPayment";
 
+            salaryEmployeeId.DataPropertyName = "id";
+            salaryName.DataPropertyName = "name";
+            salaryEmail.DataPropertyName = "email";
+            salaryPosition.DataPropertyName = "position";
+            salaryDateHired.DataPropertyName = "DateHiredFormatted";
+            salaryLastPaid.DataPropertyName = "LastPaidFormatted";
+            salaryDaysLeft.DataPropertyName = "DaysUntilNextPayment";
+
 
             employeesTable.DataSource = null;
+            salaryTable.DataSource = null;
 
 
             var employees = await employeeRepository.GetAllEmployees();
@@ -103,12 +112,14 @@ namespace employee_payroll
                 }).ToList();
 
                 employeesTable.DataSource = formattedEmployees;
+                salaryTable.DataSource = formattedEmployees;
             }
 
 
             if (employeesTable.Rows.Count > 0)
             {
                 employeesTable.ClearSelection();
+                salaryTable.ClearSelection();
             }
             isInitialLoad = false;
 
@@ -220,6 +231,7 @@ namespace employee_payroll
             employeeIdLabel.Text = "N/A";
             addButton.Enabled = true;
             editButton.Enabled = false;
+            //viewHistory.Enabled = false;
             employeeDateHiredTxt.Text = DateTime.Now.ToShortDateString();
             //employeeIdTxt.Text = string.Empty;
             employeeeNameTxt.Text = string.Empty;
@@ -280,7 +292,7 @@ namespace employee_payroll
             {
                 addButton.Enabled = false;
                 editButton.Enabled = true;
-
+                //viewHistory.Enabled = true;
                 DataGridViewRow selectedRow = employeesTable.SelectedRows[0];
 
 
@@ -354,12 +366,15 @@ namespace employee_payroll
             employeePositionCb.SelectedIndex = 0;
             employeePositionCb.Refresh();
             editButton.Enabled = false;
+            //viewHistory.Enabled = false;
         }
 
         private async void Form1_Load(object sender, EventArgs e)
         {
 
             editButton.Enabled = false;
+            //viewHistory.Enabled = false;
+            viewPayHistory.Enabled = false;
             payEmployeeButton.Enabled = false;
             employeeDateHiredTxt.Text = DateTime.Now.ToShortDateString();
             await loadEmployees();
@@ -539,8 +554,9 @@ namespace employee_payroll
         {
             fromDp.Value = DateTime.Today.AddMonths(-1); // Last Month
             toDp.Value = DateTime.Today;
-            clearHistoryFields();
             await loadHistory();
+            clearHistoryFields();
+            historyTable.ClearSelection();
         }
 
         private async void restoreButton_Click(object sender, EventArgs e)
@@ -742,9 +758,64 @@ namespace employee_payroll
                 return;
             }
 
-            var employeeForm = new EmployeeDataFrom(employeeId, payrollRepository, employeeRepository); 
+            var employeeForm = new EmployeeDataFrom(employeeId, payrollRepository, employeeRepository);
             employeeForm.ShowDialog();
 
+        }
+
+        private void salaryTable_SelectionChanged(object sender, EventArgs e)
+        {
+            if (isInitialLoad)
+                return;
+
+            if (salaryTable.SelectedRows.Count > 0)
+            {
+
+                viewPayHistory.Enabled = true;
+                DataGridViewRow selectedRow = salaryTable.SelectedRows[0];
+
+                salaryNameTxt.Text = selectedRow.Cells[1].Value?.ToString() ?? string.Empty;
+                salaryPositionTxt.Text = selectedRow.Cells[3].Value?.ToString() ?? string.Empty;
+                salaryLastPaidTxt.Text = selectedRow.Cells[5].Value?.ToString() ?? string.Empty;
+                daysLeftTxt.Text = selectedRow.Cells[6].Value?.ToString() ?? string.Empty;
+                salaryIdLabel.Text = selectedRow.Cells[0].Value?.ToString() ?? "N/A";
+
+
+
+            }
+        }
+
+        private async void viewPayHistory_Click(object sender, EventArgs e)
+        {
+            if (salaryIdLabel.Text.Equals("N/A"))
+            {
+                MessageBox.Show("Please select an employee to view history.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int employeeId = int.Parse(salaryIdLabel.Text.Trim());
+
+
+            var currentEmployee = await employeeRepository.GetEmployeeById(employeeId);
+
+            if (currentEmployee == null)
+            {
+                MessageBox.Show("Employee not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var employeeForm = new EmployeeDataFrom(employeeId, payrollRepository, employeeRepository);
+            employeeForm.ShowDialog();
+        }
+
+        private void salaryClearButton_Click(object sender, EventArgs e)
+        {
+            salaryIdLabel.Text = "N/A";
+            salaryNameTxt.Text = string.Empty;
+            salaryPositionTxt.Text = string.Empty;
+            salaryLastPaidTxt.Text = string.Empty;
+            daysLeftTxt.Text = string.Empty;
+            viewPayHistory.Enabled = false;
         }
     }
 }
